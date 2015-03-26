@@ -1,5 +1,5 @@
-# reddit_programming_interview_questions 
-http://www.reddit.com/r/cscareerquestions/comments/20ahfq/heres_a_pretty_big_list_of_programming_interview/
+# reddit_programming_interview_questions  
+http://www.reddit.com/r/cscareerquestions/comments/20ahfq/heres_a_pretty_big_list_of_programming_interview/  
 
 General
 Find the most frequent integer in an array
@@ -61,7 +61,6 @@ Check if a linked list has cycles
 Given a circular linked list, find the node at the beginning of the loop. Example: A-->B-->C --> D-->E -->C, C is the node that begins the loop
 Check whether a link list is a palindrome
 Reverse a linked list iteratively and recursively
-
 Sorting
 Implement bubble sort
 Implement selection sort
