@@ -7,13 +7,13 @@ public class CheckForUnique {
 		System.out.println(hasDuplicates("abc"));
 	}
 
-	// assume word only contains lower case characters
 	public static boolean hasDuplicates(String word) {
 		boolean[] check = new boolean[26]; // 26 English alphabets
 		
 		for (int i = 0; i < word.length(); i++) {
 			// int value of 'a' is 97. By subtracting this number we find array
-			// index starting from 0 to 26
+			// index
+			// starting from 0 to 26
 			int pos = word.toLowerCase().charAt(i) - 'a';
 			
 			if (check[pos])
