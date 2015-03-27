@@ -1,5 +1,7 @@
 package strings;
 
+import java.util.Arrays;
+
 // http://javarevisited.blogspot.com/2012/01/how-to-reverse-string-in-java-using.html
 public class ReverseString {
 	public static String reverseIteratively(String input) {
@@ -10,6 +12,25 @@ public class ReverseString {
 		}
 		
 		return reverse;
+	}
+	
+	// http://www.ericleschinski.com/c/reverse_string_in_java/
+	public static String reverseInPlace(String input) {
+		char[] reverseArray = input.toCharArray();
+		
+		int left = 0;
+		int right = reverseArray.length - 1;
+		
+		while (left <= right) {
+			char tmp = reverseArray[right];
+			reverseArray[right] = reverseArray[left];
+			reverseArray[left] = tmp;
+			
+			left++;
+			right--;
+		}
+		
+		return new String(reverseArray);
 	}
 	
 	public static String reverseRecursively(String input) {
@@ -27,6 +48,7 @@ public class ReverseString {
 		String input = "abc";
 	
 		System.out.println(reverseIteratively(input));
+		System.out.println(reverseInPlace(input));
 		System.out.println(reverseRecursively(input));
 	}
 }
