@@ -38,10 +38,15 @@ public class ReverseString {
 		
 		//base case to handle one char string and empty string
         if (input.length() < 2) {
+        	System.out.println("reverseRecursively output:" + input);
+        	
             return input;
         }
+        
+        String output = reverseRecursively(input.substring(1)) + input.charAt(0);
+        System.out.println("reverseRecursively output:" + output);
 
-        return reverseRecursively(input.substring(1)) + input.charAt(0);
+        return output;
 	}
 	
 	public static void main(String[] args) {
