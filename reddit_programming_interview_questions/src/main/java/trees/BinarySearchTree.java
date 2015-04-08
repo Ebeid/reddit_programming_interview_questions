@@ -43,10 +43,14 @@ public class BinarySearchTree {
 		if (root == null) {
 			return 0;
 		}
+		
 		Node currNode = root;
+		
+		/* loop down to find the leftmost leaf */
 		while (currNode.left != null) {
 			currNode = currNode.left;
 		}
+		
 		return currNode.value;
 	}
 
@@ -59,9 +63,12 @@ public class BinarySearchTree {
 		}
 
 		Node currNode = root;
+		
+		/* loop down to find the leftmost leaf */
 		while (currNode.right != null) {
 			currNode = currNode.right;
 		}
+		
 		return currNode.value;
 	}
 
@@ -123,7 +130,6 @@ public class BinarySearchTree {
 		printPostOrderRec(currRoot.left);
 		printPostOrderRec(currRoot.right);
 		System.out.print(currRoot.value + ", ");
-
 	}
 
 	public static void main(String[] args) {
