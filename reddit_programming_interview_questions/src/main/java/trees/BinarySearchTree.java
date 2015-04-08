@@ -36,6 +36,23 @@ public class BinarySearchTree {
 		}
 	}
 
+	// http://www.algolist.net/Data_structures/Binary_search_tree/Removal
+	public boolean remove(int value) {
+		if (root == null)
+			return false;
+		else {
+			if (root.value == value) {
+				Node auxRoot = new Node(0);
+				auxRoot.left = root;
+				boolean result = root.remove(value, auxRoot);
+				root = auxRoot.left;
+				return result;
+			} else {
+				return root.remove(value, null);
+			}
+		}
+	}
+
 	/**
 	 * Returns the minimum value in the Binary Search Tree.
 	 */
@@ -43,14 +60,14 @@ public class BinarySearchTree {
 		if (root == null) {
 			return 0;
 		}
-		
+
 		Node currNode = root;
-		
+
 		/* loop down to find the leftmost leaf */
 		while (currNode.left != null) {
 			currNode = currNode.left;
 		}
-		
+
 		return currNode.value;
 	}
 
@@ -63,12 +80,12 @@ public class BinarySearchTree {
 		}
 
 		Node currNode = root;
-		
+
 		/* loop down to find the rightmost leaf */
 		while (currNode.right != null) {
 			currNode = currNode.right;
 		}
-		
+
 		return currNode.value;
 	}
 
@@ -149,13 +166,17 @@ public class BinarySearchTree {
 
 		System.out.println("Inorder traversal");
 		bst.printInorder();
-
+		
 		System.out.println("Preorder Traversal");
 		bst.printPreorder();
 
 		System.out.println("Postorder Traversal");
 		bst.printPostorder();
-
+		
+		System.out.println("remove 17");
+		bst.remove(17);
+		bst.printInorder();
+		
 		System.out.println("The minimum value in the BST: " + bst.findMinimum());
 		System.out.println("The maximum value in the BST: " + bst.findMaximum());
 	}
