@@ -64,7 +64,7 @@ public class BinarySearchTree {
 
 		Node currNode = root;
 		
-		/* loop down to find the leftmost leaf */
+		/* loop down to find the rightmost leaf */
 		while (currNode.right != null) {
 			currNode = currNode.right;
 		}
