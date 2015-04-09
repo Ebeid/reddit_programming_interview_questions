@@ -173,18 +173,10 @@ public class BinarySearchTree {
 
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
+		bst.insert(60);
 		bst.insert(40);
-		bst.insert(25);
-		bst.insert(78);
-		bst.insert(10);
-		bst.insert(3);
-		bst.insert(17);
-		bst.insert(32);
-		bst.insert(30);
-		bst.insert(38);
-		bst.insert(78);
-		bst.insert(50);
-		bst.insert(93);
+		bst.insert(70);
+		bst.insert(80);
 
 		System.out.println("Inorder traversal");
 		bst.printInorder();
@@ -195,8 +187,11 @@ public class BinarySearchTree {
 		System.out.println("Postorder Traversal");
 		bst.printPostorder();
 
-		System.out.println("remove 17");
-		bst.delete(bst.root, 17);
+		System.out.println("remove 70");
+		Node nodeReferencingDeletedNode = bst.delete(bst.root, 70);
+		System.out.println("nodeReferencingDeletedNode: " + nodeReferencingDeletedNode.value);
+		
+		System.out.println("Inorder traversal");
 		bst.printInorder();
 
 		System.out.println("The minimum value in the BST: "
