@@ -1,112 +1,64 @@
 package sorting;
 
-import java.util.Random;
-
-//http://cs.fit.edu/~mmahoney/cis5100/examples/ch16/Fig16_10_11/MergeSort.java
+// http://www.java2novice.com/java-sorting-algorithms/merge-sort/
 public class MergeSort {
-	private int[] data; // array of values
-	private static Random generator = new Random();
-
-	public static void main(String[] args) {
-		MergeSort mergeSort = new MergeSort(7);
-		mergeSort.sort();
-	}
-
-	// create array of given size and fill with random integers
-	public MergeSort(int size) {
-		data = new int[size]; // create space for array
-
-		// fill array with random ints in range 10-99
-		for (int i = 0; i < size; i++)
-			data[i] = 10 + generator.nextInt(90);
-	} // end MergeSort constructor
-
-	// calls recursive split method to begin merge sorting
-	public void sort() {
-		sortArray(0, data.length - 1); // split entire array
-	} // end method sort
-
-	// splits array, sorts subarrays and merges subarrays into sorted array
-	private void sortArray(int low, int high) {
-		// test base case; size of array equals 1
-		if ((high - low) >= 1) // if not base case
-		{
-			int middle1 = (low + high) / 2; // calculate middle of array
-			int middle2 = middle1 + 1; // calculate next element over
-
-			// output split step
-			System.out.println("split:   " + subarray(low, high));
-			System.out.println("         " + subarray(low, middle1));
-			System.out.println("         " + subarray(middle2, high));
-			System.out.println();
-
-			// split array in half; sort each half (recursive calls)
-			sortArray(low, middle1); // first half of array
-			sortArray(middle2, high); // second half of array
-
-			// merge two sorted arrays after split calls return
-			merge(low, middle1, middle2, high);
-		} // end if
-	} // end method split
-
-	// merge two sorted subarrays into one sorted subarray
-	private void merge(int left, int middle1, int middle2, int right) {
-		int leftIndex = left; // index into left subarray
-		int rightIndex = middle2; // index into right subarray
-		int combinedIndex = left; // index into temporary working array
-		int[] combined = new int[data.length]; // working array
-
-		// output two subarrays before merging
-		System.out.println("merge:   " + subarray(left, middle1));
-		System.out.println("         " + subarray(middle2, right));
-
-		// merge arrays until reaching end of either
-		while (leftIndex <= middle1 && rightIndex <= right) {
-			// place smaller of two current elements into result
-			// and move to next space in arrays
-			if (data[leftIndex] <= data[rightIndex])
-				combined[combinedIndex++] = data[leftIndex++];
-			else
-				combined[combinedIndex++] = data[rightIndex++];
-		} // end while
-
-		// if left array is empty
-		if (leftIndex == middle2)
-			// copy in rest of right array
-			while (rightIndex <= right)
-				combined[combinedIndex++] = data[rightIndex++];
-		else
-			// right array is empty
-			// copy in rest of left array
-			while (leftIndex <= middle1)
-				combined[combinedIndex++] = data[leftIndex++];
-
-		// copy values back into original array
-		for (int i = left; i <= right; i++)
-			data[i] = combined[i];
-
-		// output merged array
-		System.out.println("         " + subarray(left, right));
-		System.out.println();
-	} // end method merge
-
-	// method to output certain values in array
-	public String subarray(int low, int high) {
-		StringBuffer temporary = new StringBuffer();
-
-		// output spaces for alignment
-		for (int i = 0; i < low; i++)
-			temporary.append("   ");
-
-		// output elements left in array
-		for (int i = low; i <= high; i++)
-			temporary.append(" " + data[i]);
-
-		return temporary.toString();
-	} // end method subarray
-
-	// method to output values in array
-	public String toString() {
-		return subarray(0, data.length - 1);
-	} // end method toString
-} // end class MergeSort
+    private int[] array;
+    private int[] tempMergArr;
+    private int length;
+ 
+    public void sort(int inputArr[]) {
+        this.array = inputArr;
+        this.length = inputArr.length;
+        this.tempMergArr = new int[length];
+        doMergeSort(0, length - 1);
+    }
+ 
+    private void doMergeSort(int lowerIndex, int higherIndex) {
+        if (lowerIndex < higherIndex) {
+            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
+            // Below step sorts the left side of the array
+            doMergeSort(lowerIndex, middle);
+            // Below step sorts the right side of the array
+            doMergeSort(middle + 1, higherIndex);
+            // Now merge both sides
+            mergeParts(lowerIndex, middle, higherIndex);
+        }
+    }
+ 
+    private void mergeParts(int lowerIndex, int middle, int higherIndex) {
+        for (int i = lowerIndex; i <= higherIndex; i++) {
+            tempMergArr[i] = array[i];
+        }
+        
+        int i = lowerIndex;
+        int j = middle + 1;
+        int k = lowerIndex;
+        
+        while (i <= middle && j <= higherIndex) {
+            if (tempMergArr[i] <= tempMergArr[j]) {
+                array[k] = tempMergArr[i];
+                i++;
+            } else {
+                array[k] = tempMergArr[j];
+                j++;
+            }
+            k++;
+        }
+        while (i <= middle) {
+            array[k] = tempMergArr[i];
+            k++;
+            i++;
+        }
+    }
+    
+    public static void main(String a[]) {
+        int[] inputArr = {45,23,11,89,77,98,4,28,65,43};
+        MergeSort mms = new MergeSort();
+        mms.sort(inputArr);
+        
+        for(int i : inputArr) {
+            System.out.print(i);
+            System.out.print(" ");
+        }
+    }
+}
