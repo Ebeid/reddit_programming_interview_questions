@@ -1,64 +1,55 @@
 package sorting;
 
-// http://www.java2novice.com/java-sorting-algorithms/merge-sort/
-public class MergeSort {
-    private int[] array;
-    private int[] tempMergArr;
-    private int length;
- 
-    public void sort(int inputArr[]) {
-        this.array = inputArr;
-        this.length = inputArr.length;
-        this.tempMergArr = new int[length];
-        doMergeSort(0, length - 1);
-    }
- 
-    private void doMergeSort(int lowerIndex, int higherIndex) {
-        if (lowerIndex < higherIndex) {
-            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
-            // Below step sorts the left side of the array
-            doMergeSort(lowerIndex, middle);
-            // Below step sorts the right side of the array
-            doMergeSort(middle + 1, higherIndex);
-            // Now merge both sides
-            mergeParts(lowerIndex, middle, higherIndex);
-        }
-    }
- 
-    private void mergeParts(int lowerIndex, int middle, int higherIndex) {
-        for (int i = lowerIndex; i <= higherIndex; i++) {
-            tempMergArr[i] = array[i];
-        }
-        
-        int i = lowerIndex;
-        int j = middle + 1;
-        int k = lowerIndex;
-        
-        while (i <= middle && j <= higherIndex) {
-            if (tempMergArr[i] <= tempMergArr[j]) {
-                array[k] = tempMergArr[i];
-                i++;
-            } else {
-                array[k] = tempMergArr[j];
-                j++;
-            }
-            k++;
-        }
-        while (i <= middle) {
-            array[k] = tempMergArr[i];
-            k++;
-            i++;
-        }
-    }
-    
-    public static void main(String a[]) {
-        int[] inputArr = {45,23,11,89,77,98,4,28,65,43};
-        MergeSort mms = new MergeSort();
-        mms.sort(inputArr);
-        
-        for(int i : inputArr) {
-            System.out.print(i);
-            System.out.print(" ");
-        }
-    }
+// http://www.softwareandfinance.com/Java/MergeSort_Recursive.html
+class MergeSort {
+	static public void DoMerge(int[] numbers, int left, int mid, int right) {
+		int[] temp = new int[25];
+		int i, left_end, num_elements, tmp_pos;
+
+		left_end = (mid - 1);
+		tmp_pos = left;
+		num_elements = (right - left + 1);
+
+		while ((left <= left_end) && (mid <= right)) {
+			if (numbers[left] <= numbers[mid])
+				temp[tmp_pos++] = numbers[left++];
+			else
+				temp[tmp_pos++] = numbers[mid++];
+		}
+
+		while (left <= left_end)
+			temp[tmp_pos++] = numbers[left++];
+
+		while (mid <= right)
+			temp[tmp_pos++] = numbers[mid++];
+
+		for (i = 0; i < num_elements; i++) {
+			numbers[right] = temp[right];
+			right--;
+		}
+	}
+
+	static public void MergeSort_Recursive(int[] numbers, int left, int right) {
+		int mid;
+
+		if (right > left) {
+			mid = (right + left) / 2;
+			MergeSort_Recursive(numbers, left, mid);
+			MergeSort_Recursive(numbers, (mid + 1), right);
+
+			DoMerge(numbers, left, (mid + 1), right);
+		}
+	}
+
+	public static void main(String[] args) {
+		int[] numbers = { 3, 8, 7, 5, 2, 1, 9, 6, 4 };
+		int len = 9;
+
+		System.out.println("MergeSort By Recursive Method");
+
+		MergeSort_Recursive(numbers, 0, len - 1);
+		for (int i = 0; i < 9; i++)
+			System.out.println(numbers[i]);
+
+	}
 }
