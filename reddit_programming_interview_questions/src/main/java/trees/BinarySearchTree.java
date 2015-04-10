@@ -1,5 +1,7 @@
 package trees;
 
+import java.util.Stack;
+
 // http://www.javabeat.net/binary-search-tree-traversal-java/
 public class BinarySearchTree {
 	public Node root;
@@ -129,6 +131,24 @@ public class BinarySearchTree {
 		printPreOrder(root.right);
 	}
 	
+	// http://articles.leetcode.com/2010/04/binary-search-tree-in-order-traversal.html
+	private void printInOrderIterative(Node root) {
+		Stack<Node> stack = new Stack<Node>();
+		Node current = root;
+		
+		while (!stack.empty() || current != null) {
+			if (current != null) {
+				stack.push(current);
+				current = current.left;
+			}
+			else {
+				current = stack.pop();
+				System.out.print(current.value + ", ");
+				current = current.right;
+			}
+		}
+	}
+	
 	/**
 	 * method to recursively print the contents in a Preorder way
 	 */
@@ -163,8 +183,12 @@ public class BinarySearchTree {
 		bst.insert(70);
 		bst.insert(80);
 
-		System.out.println("Inorder traversal");
+		System.out.println("Inorder traversal recursively");
 		bst.printInOrder(bst.root);
+		System.out.println();
+		
+		System.out.println("Inorder traversal iteratively");
+		bst.printInOrderIterative(bst.root);
 		System.out.println();
 
 		System.out.println("Preorder Traversal");
