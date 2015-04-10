@@ -1,5 +1,7 @@
 package sorting;
 
+import java.util.Arrays;
+
 // http://www.softwareandfinance.com/Java/MergeSort_Recursive.html
 class MergeSort {
 	static public void DoMerge(int[] numbers, int left, int mid, int right) {
@@ -43,13 +45,12 @@ class MergeSort {
 
 	public static void main(String[] args) {
 		int[] numbers = { 3, 8, 7, 5, 2, 1, 9, 6, 4 };
-		int len = 9;
-
+		int length = numbers.length;
+		
+		System.out.println(Arrays.toString(numbers));
 		System.out.println("MergeSort By Recursive Method");
 
-		MergeSort_Recursive(numbers, 0, len - 1);
-		for (int i = 0; i < 9; i++)
-			System.out.println(numbers[i]);
-
+		MergeSort_Recursive(numbers, 0, length - 1);
+		System.out.println(Arrays.toString(numbers));
 	}
 }
