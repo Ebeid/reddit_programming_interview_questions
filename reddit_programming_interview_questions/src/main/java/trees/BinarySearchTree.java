@@ -74,9 +74,14 @@ public class BinarySearchTree {
 			}
 			// case 3: 2 children
 			else {
-				Node minimumNode = findMinimum(root.right);
-				root.value = minimumNode.value;
-				root.right = delete(root.right, minimumNode.value);
+				Node minimumNode = findMinimum(root.right); // find minimum node in a right subtree
+				root.value = minimumNode.value; // copy value of minimum node to value of a node to be deleted
+				root.right = delete(root.right, minimumNode.value); // delete the minimum node
+				
+				// alternative
+//				Node maximumNode = findMaximum(root.left);
+//				root.value = maximumNode.value;
+//				root.left = delete(root.left, maximumNode.value);
 			}
 		}
 
@@ -112,65 +117,45 @@ public class BinarySearchTree {
 	}
 
 	/**
-	 * Printing the contents of the tree in an inorder way.
+	 * method to recursively print the contents in a Inorder way
 	 */
-	public void printInorder() {
-		printInOrderRec(root);
-		System.out.println("");
-	}
-
-	/**
-	 * Helper method to recursively print the contents in an inorder way
-	 */
-	private void printInOrderRec(Node currRoot) {
-		if (currRoot == null) {
+	private void printInOrder(Node root) {
+		if (root == null) {
 			return;
 		}
-		printInOrderRec(currRoot.left);
-		System.out.print(currRoot.value + ", ");
-		printInOrderRec(currRoot.right);
-	}
 
-	/**
-	 * Printing the contents of the tree in a Preorder way.
-	 */
-	public void printPreorder() {
-		printPreOrderRec(root);
-		System.out.println("");
+		printPreOrder(root.left);
+		System.out.print(root.value + ", ");
+		printPreOrder(root.right);
 	}
-
+	
 	/**
-	 * Helper method to recursively print the contents in a Preorder way
+	 * method to recursively print the contents in a Preorder way
 	 */
-	private void printPreOrderRec(Node currRoot) {
-		if (currRoot == null) {
+	private void printPreOrder(Node root) {
+		if (root == null) {
 			return;
 		}
-		System.out.print(currRoot.value + ", ");
-		printPreOrderRec(currRoot.left);
-		printPreOrderRec(currRoot.right);
+		
+		System.out.print(root.value + ", ");
+		printPreOrder(root.left);
+		printPreOrder(root.right);
 	}
 
 	/**
-	 * Printing the contents of the tree in a Postorder way.
+	 * method to recursively print the contents in a Postorder way
 	 */
-	public void printPostorder() {
-		printPostOrderRec(root);
-		System.out.println("");
-	}
-
-	/**
-	 * Helper method to recursively print the contents in a Postorder way
-	 */
-	private void printPostOrderRec(Node currRoot) {
-		if (currRoot == null) {
+	private void printPostOrder(Node root) {
+		if (root == null) {
 			return;
 		}
-		printPostOrderRec(currRoot.left);
-		printPostOrderRec(currRoot.right);
-		System.out.print(currRoot.value + ", ");
+		
+		printPostOrder(root.left);
+		printPostOrder(root.right);
+		System.out.print(root.value + ", ");
 	}
 
+	// https://www.cs.usfca.edu/~galles/visualization/BST.html
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
 		bst.insert(60);
@@ -179,20 +164,24 @@ public class BinarySearchTree {
 		bst.insert(80);
 
 		System.out.println("Inorder traversal");
-		bst.printInorder();
+		bst.printInOrder(bst.root);
+		System.out.println();
 
 		System.out.println("Preorder Traversal");
-		bst.printPreorder();
+		bst.printPreOrder(bst.root);
+		System.out.println();
 
 		System.out.println("Postorder Traversal");
-		bst.printPostorder();
+		bst.printPostOrder(bst.root);
+		System.out.println();
 
 		System.out.println("remove 70");
 		Node nodeReferencingDeletedNode = bst.delete(bst.root, 70);
 		System.out.println("nodeReferencingDeletedNode: " + nodeReferencingDeletedNode.value);
 		
 		System.out.println("Inorder traversal");
-		bst.printInorder();
+		bst.printInOrder(bst.root);
+		System.out.println();
 
 		System.out.println("The minimum value in the BST: "
 				+ bst.findMinimum(bst.root).value);
