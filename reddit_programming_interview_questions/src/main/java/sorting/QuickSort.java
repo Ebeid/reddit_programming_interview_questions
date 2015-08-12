@@ -16,7 +16,8 @@ public class QuickSort {
 		System.out.println(Arrays.toString(array) + " - sorted");
 		System.out.println();
 	}
-
+	
+	// http://faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Tremblay/L06-QuickSort.htm
 	public static int partition(int[] array, int left, int right) {
 		int i = left;
 		int j = right;
