@@ -34,11 +34,9 @@ public class QuickSort {
 		System.out.println("sub array: " + list);
 
 		while (i <= j) {
-			// search for an element greater than or equal to pivot
 			while (array[i] < pivot) {
 				i++;
 			}
-			// search for an element less than or equal to pivot
 			while (array[j] > pivot) {
 				j--;
 			}
