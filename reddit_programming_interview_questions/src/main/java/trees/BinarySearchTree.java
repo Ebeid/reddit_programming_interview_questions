@@ -126,9 +126,9 @@ public class BinarySearchTree {
 			return;
 		}
 
-		printPreOrder(root.left);
+		printInOrder(root.left);
 		System.out.print(root.value + ", ");
-		printPreOrder(root.right);
+		printInOrder(root.right);
 	}
 	
 	// http://articles.leetcode.com/2010/04/binary-search-tree-in-order-traversal.html
